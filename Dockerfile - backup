@@ -1,0 +1,18 @@
+FROM node
+
+WORKDIR /app
+
+EXPOSE 80
+
+COPY package*.json ./
+
+RUN npm --version
+RUN npm config set registry https://registry.npm.taobao.org
+RUN npm install cnpm -g --registry=https://r.npm.taobao.org
+RUN cnpm install
+
+COPY . .
+
+ENV TZ=Asia/Shanghai
+
+CMD ["node", "index.js"]
